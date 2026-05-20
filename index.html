@@ -62,14 +62,19 @@ nav.scrolled {
   border-bottom: 1px solid var(--border);
 }
 .nav-logo {
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.7rem;
-  color: var(--rose-gold);
+  display: flex;
+  align-items: center;
   text-decoration: none;
-  letter-spacing: 0.01em;
   line-height: 1;
 }
-.nav-logo span { color: var(--champagne); }
+.nav-logo img {
+  height: 44px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.92;
+  transition: opacity 0.3s;
+}
+.nav-logo img:hover { opacity: 1; }
 .nav-links {
   display: flex;
   gap: 36px;
@@ -153,11 +158,26 @@ nav.scrolled {
 .hero-bg {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(ellipse at 70% 50%, rgba(192,52,122,0.12) 0%, transparent 60%),
-    radial-gradient(ellipse at 20% 70%, rgba(201,149,108,0.1) 0%, transparent 55%),
-    radial-gradient(ellipse at 50% 0%, rgba(212,168,67,0.06) 0%, transparent 50%),
-    linear-gradient(160deg, #0c0910 0%, #080808 50%, #0d0a05 100%);
+  background-image: url('IMG_5182.JPG');
+  background-size: cover;
+  background-position: center 30%;
+  transform: scale(1.04);
+  animation: hero-zoom 14s ease-out forwards;
+}
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(8,8,8,0.82) 0%,
+    rgba(8,8,8,0.55) 50%,
+    rgba(8,8,8,0.25) 100%
+  );
+}
+@keyframes hero-zoom {
+  from { transform: scale(1.04); }
+  to   { transform: scale(1.10); }
 }
 
 /* Animated bokeh dots */
@@ -1207,7 +1227,7 @@ footer {
 
 <!-- ─── NAV ─── -->
 <nav id="nav">
-  <a href="#" class="nav-logo">Click Our <span>Heels</span></a>
+  <a href="#" class="nav-logo"><img src="034F3597-8396-4A1F-A843-5FD68C661755.png" alt="Click Our Heels"></a>
   <ul class="nav-links">
     <li><a href="#what">The Experience</a></li>
     <li><a href="#events">Events</a></li>
@@ -1234,37 +1254,21 @@ footer {
 <section id="hero">
   <div class="hero-bg"></div>
 
-  <!-- Bokeh -->
-  <div class="bokeh" style="width:200px;height:200px;background:rgba(201,149,108,0.12);top:20%;left:10%;animation-delay:0s;animation-duration:9s;"></div>
-  <div class="bokeh" style="width:140px;height:140px;background:rgba(192,52,122,0.1);top:60%;left:40%;animation-delay:2s;animation-duration:7s;"></div>
-  <div class="bokeh" style="width:100px;height:100px;background:rgba(212,168,67,0.08);top:30%;right:45%;animation-delay:4s;animation-duration:11s;"></div>
-
-  <!-- Spotlights -->
-  <div class="spotlight spotlight-1"></div>
-  <div class="spotlight spotlight-2"></div>
 
   <div class="hero-content">
     <p class="hero-eyebrow">Mirror Photo Booth Rentals · Charlotte, NC</p>
-    <h1 class="hero-h1">One Booth.<br><em>Every Dance.</em><br>Every Moment, Yours.</h1>
-    <p class="hero-sub">Charlotte's dance community finally has a photo experience built for it — salsa socials, ballroom competitions, recitals, galas. A full-length mirror booth that captures you at your best and puts the photo in your hand before the song ends.</p>
+    <h1 class="hero-h1"><em>Forever</em><br>Your Moment.</h1>
+    <p class="hero-sub">Charlotte's dance community — salsa socials, ballroom competitions, recitals, galas — finally has a photo experience built for it. Step up to the mirror. See yourself. Walk away with something you're proud to share.</p>
     <div class="hero-ctas">
       <a href="#contact" class="btn-primary">✨ Book Your Event</a>
       <a href="#what" class="btn-secondary">See How It Works</a>
     </div>
   </div>
 
-  <!-- Mirror graphic -->
-  <div class="mirror-graphic">
-    <div class="mirror-outer">
-      <div class="mirror-inner">
-        <div class="mirror-silhouette">💃</div>
-        <div class="mirror-screen">TOUCH TO START</div>
-        <div class="mirror-shimmer"></div>
-        <div class="mirror-dots">
-          <span></span><span></span><span></span>
-        </div>
-      </div>
-    </div>
+  <!-- Brand logo graphic -->
+  <div class="mirror-graphic" style="display:flex;align-items:center;justify-content:center;">
+    <img src="C65C7DE2-1272-47C7-9253-2E7ED34CC0B5.png" alt="Click Our Heels"
+      style="width:min(38vw,320px);height:auto;filter:drop-shadow(0 0 40px rgba(201,149,108,0.3));opacity:0;animation:mirror-appear 1.2s ease-out 0.6s forwards;">
     <div class="feature-pill pill-1">📸 Instant Prints</div>
     <div class="feature-pill pill-2">✍️ Digital Signing</div>
     <div class="feature-pill pill-3">🎀 Custom Branding</div>
@@ -1885,7 +1889,7 @@ footer {
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
-      <a href="#" class="footer-logo">Click Our Heels</a>
+      <a href="#" class="footer-logo"><img src="034F3597-8396-4A1F-A843-5FD68C661755.png" alt="Click Our Heels" style="height:40px;width:auto;filter:brightness(0) invert(1);opacity:0.7;"></a>
       <p class="footer-tagline">Mirror photo booth rentals built for Charlotte's dance community. Every event deserves a spotlight moment.</p>
     </div>
     <div class="footer-links-col">
