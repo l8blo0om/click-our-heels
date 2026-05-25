@@ -2107,7 +2107,7 @@ footer {
     <div class="contact-info">
       <p class="section-label reveal">Let's Make It Happen</p>
       <h2 class="section-h2 reveal">Book Your <em>Date</em></h2>
-      <p class="section-lead reveal">Fill out the form and we'll get back to you within 24 hours with availability and everything you need to lock in your event.</p>
+      <p class="section-lead reveal">Pick a date and time that works for you — we'll confirm your booking and send everything you need to lock in your event.</p>
 
       <div class="contact-detail reveal reveal-delay-1">
         <div class="contact-icon">📍</div>
@@ -2133,64 +2133,9 @@ footer {
     </div>
 
     <div class="contact-form reveal reveal-delay-2">
-      <div class="form-row">
-        <div class="form-group">
-          <label for="fname">First Name</label>
-          <input type="text" id="fname" placeholder="Your name">
-        </div>
-        <div class="form-group">
-          <label for="lname">Last Name</label>
-          <input type="text" id="lname" placeholder="Last name">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="email">Email Address</label>
-        <input type="email" id="email" placeholder="you@example.com">
-      </div>
-      <div class="form-group">
-        <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" placeholder="(704) 555-0100">
-      </div>
-      <div class="form-group">
-        <label for="event-type">Event Type</label>
-        <select id="event-type">
-          <option value="">Select your event...</option>
-          <option>Recital</option>
-          <option>Competition / Send-Off</option>
-          <option>Showcase</option>
-          <option>Studio Celebration</option>
-          <option>Team Banquet</option>
-          <option>Birthday / Sweet 16</option>
-          <option>Quinceañera</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="event-date">Event Date</label>
-          <input type="date" id="event-date">
-        </div>
-        <div class="form-group">
-          <label for="guests">Estimated Guests</label>
-          <select id="guests">
-            <option value="">How many?</option>
-            <option>Under 50</option>
-            <option>50–100</option>
-            <option>100–200</option>
-            <option>200–300</option>
-            <option>300+</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="message">Tell Us About Your Event</label>
-        <textarea id="message" placeholder="Studio name, venue, any questions or special requests..."></textarea>
-      </div>
-      <button type="button" class="form-submit" onclick="handleSubmit()">
-        ✨ Send My Inquiry
-      </button>
-      <div class="form-success" id="formSuccess">
-        🎉 Thank you! We'll be in touch within 24 hours to confirm your date.
+      <div class="calendly-inline-widget"
+           data-url="https://calendly.com/l8blo0om?hide_gdpr_banner=1&background_color=0d0d0d&text_color=e8ddd0&primary_color=c9956c"
+           style="min-width:300px;height:680px;border-radius:16px;overflow:hidden;">
       </div>
     </div>
   </div>
@@ -2352,6 +2297,9 @@ function handleSubmit() {
 </script>
 
 <!-- Google Translate (hidden — language picker uses this) -->
+<!-- Calendly widget script -->
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
 <div id="google_translate_element" style="display:none;visibility:hidden;"></div>
 <script>
 function googleTranslateElementInit() {
