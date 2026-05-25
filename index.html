@@ -211,33 +211,50 @@ body { top: 0 !important; }
   padding: calc(var(--promo-h) + var(--nav-h) + 20px) 6% 0;
 }
 
-.hero-bg {
+/* ── Hero background carousel ── */
+.hero-slides {
   position: absolute;
   inset: 0;
-  background-image: url('IMG_5181.JPG');
+  overflow: hidden;
+}
+.hero-slide {
+  position: absolute;
+  inset: 0;
   background-size: cover;
   background-position: right 30% center;
-  transform: scale(1.04);
-  animation: hero-zoom 14s ease-out forwards;
+  opacity: 0;
+  animation: hero-bg-cycle 35s infinite, hero-zoom 35s ease-out infinite;
 }
-.hero-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(
-      to right,
-      rgba(8,8,8,1.00) 0%,
-      rgba(8,8,8,1.00) 45%,
-      rgba(8,8,8,0.92) 60%,
-      rgba(8,8,8,0.80) 75%,
-      rgba(8,8,8,0.65) 100%
-    );
+.hero-slide:nth-child(1) { background-image: url('IMG_5181.JPG');  animation-delay:   0s,   0s; }
+.hero-slide:nth-child(2) { background-image: url('IMG_4535.JPG');  background-position: center center; animation-delay: -28s, -28s; }
+.hero-slide:nth-child(3) { background-image: url('IMG_4536.JPG');  background-position: center center; animation-delay: -21s, -21s; }
+.hero-slide:nth-child(4) { background-image: url('IMG_5148.JPG');  background-position: right 20% center; animation-delay: -14s, -14s; }
+.hero-slide:nth-child(5) { background-image: url('IMG_4767.JPG');  background-position: center center; animation-delay:  -7s,  -7s; }
+@keyframes hero-bg-cycle {
+  0%, 17%  { opacity: 1; }
+  20%, 100% { opacity: 0; }
 }
 @keyframes hero-zoom {
   from { transform: scale(1.04); }
   to   { transform: scale(1.10); }
 }
+/* Dark overlay sits above all slides */
+.hero-slides::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to right,
+    rgba(8,8,8,1.00)  0%,
+    rgba(8,8,8,1.00) 45%,
+    rgba(8,8,8,0.90) 60%,
+    rgba(8,8,8,0.75) 78%,
+    rgba(8,8,8,0.55) 100%
+  );
+}
+/* Legacy single hero-bg (unused but kept for safety) */
+.hero-bg { display: none; }
 
 /* Animated bokeh dots */
 .bokeh {
@@ -1472,7 +1489,13 @@ footer {
 
 <!-- ─── HERO ─── -->
 <section id="hero">
-  <div class="hero-bg"></div>
+  <div class="hero-slides">
+    <div class="hero-slide"></div>
+    <div class="hero-slide"></div>
+    <div class="hero-slide"></div>
+    <div class="hero-slide"></div>
+    <div class="hero-slide"></div>
+  </div>
 
 
   <div class="hero-content">
