@@ -926,50 +926,101 @@ section { padding: 100px 6%; }
   transform: translateY(-1px);
 }
 
-/* ─── GALLERY TEASER ─── */
-/* ── Video gallery ── */
-.vg-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
-}
-.vg-item {
-  border-radius: 14px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  aspect-ratio: 9/16;
-  background: #111;
+/* ─── VIDEO CAROUSEL ─── */
+.vc-wrapper {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 540px;
+  overflow: hidden;
 }
-.vg-item video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.4s ease;
-}
-.vg-item:hover video { transform: scale(1.03); }
-.vg-mute-btn {
+.vc-slide {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
-  z-index: 2;
-  background: rgba(0,0,0,0.55);
-  border: 1px solid rgba(255,255,255,0.25);
+  width: 26%;
+  transition: transform 0.75s cubic-bezier(0.4,0,0.2,1),
+              opacity  0.75s ease;
+  z-index: 1;
+}
+.vc-slide video {
+  width: 100%;
+  aspect-ratio: 9/16;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  display: block;
+}
+.vc-slide.vc-active  { transform: translateX(0)    scale(1);    opacity: 1;   z-index: 3; }
+.vc-slide.vc-prev    { transform: translateX(-88%) scale(0.80); opacity: 0.55; z-index: 2; }
+.vc-slide.vc-next    { transform: translateX(88%)  scale(0.80); opacity: 0.55; z-index: 2; }
+.vc-slide.vc-far-l   { transform: translateX(-155%) scale(0.65); opacity: 0;   z-index: 1; }
+.vc-slide.vc-far-r   { transform: translateX(155%)  scale(0.65); opacity: 0;   z-index: 1; }
+/* Dots */
+.vc-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+.vc-dot {
+  width: 7px; height: 7px;
   border-radius: 50%;
-  width: 36px;
-  height: 36px;
+  background: var(--border);
+  transition: background 0.3s, transform 0.3s;
+  cursor: pointer;
+}
+.vc-dot.active { background: var(--rose-gold); transform: scale(1.35); }
+/* Spotify floating player */
+.sp-player {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+.sp-toggle {
+  background: #1DB954;
+  border: none;
+  border-radius: 50px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background 0.2s;
-  backdrop-filter: blur(4px);
+  gap: 7px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.4);
+  transition: transform 0.2s;
+  letter-spacing: 0.02em;
+  margin-bottom: 8px;
 }
-.vg-mute-btn:hover { background: rgba(201,149,108,0.7); }
-@media (max-width: 900px) { .vg-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 560px)  { .vg-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
+.sp-toggle:hover { transform: scale(1.05); }
+.sp-toggle svg { width: 18px; height: 18px; fill: white; }
+.sp-embed {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.55);
+  transform-origin: bottom left;
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease;
+}
+.sp-embed.hidden { transform: scale(0.85) translateY(10px); opacity: 0; pointer-events: none; }
+@media (max-width: 900px) {
+  .vc-wrapper { height: 420px; }
+  .vc-slide { width: 54%; }
+  .vc-slide.vc-prev  { transform: translateX(-90%) scale(0.78); opacity: 0.5; }
+  .vc-slide.vc-next  { transform: translateX(90%)  scale(0.78); opacity: 0.5; }
+  .vc-slide.vc-far-l, .vc-slide.vc-far-r { opacity: 0; }
+  .sp-player { bottom: 16px; left: 16px; }
+}
+@media (max-width: 560px) {
+  .vc-wrapper { height: 370px; }
+  .vc-slide { width: 72%; }
+  .vc-slide.vc-prev, .vc-slide.vc-next { opacity: 0.3; }
+}
 
 #gallery { text-align: center; }
 .gallery-grid {
@@ -1583,28 +1634,14 @@ footer {
     <p class="section-label reveal" style="text-align:center;">In Action</p>
     <h2 class="section-h2 reveal" style="text-align:center;">See the <em>Magic</em></h2>
     <p class="section-lead reveal" style="text-align:center;max-width:500px;margin:0 auto 60px;">Real moments. Real reactions. This is what happens when the mirror meets the dance floor.</p>
-    <div class="vg-grid">
-      <div class="vg-item reveal reveal-delay-1">
-        <video src="880c69f2-b02b-4dd1-aab4-69e34983cc6a.mp4" autoplay muted loop playsinline></video>
-        <button class="vg-mute-btn" title="Toggle sound">🔇</button>
-      </div>
-      <div class="vg-item reveal reveal-delay-2">
-        <video src="18b1ad3f-1231-42d2-af8a-30918c988c25.mp4" autoplay muted loop playsinline></video>
-        <button class="vg-mute-btn" title="Toggle sound">🔇</button>
-      </div>
-      <div class="vg-item reveal reveal-delay-3">
-        <video src="87a72384-f319-4791-b6f8-e7ba1c7ac018.mp4" autoplay muted loop playsinline></video>
-        <button class="vg-mute-btn" title="Toggle sound">🔇</button>
-      </div>
-      <div class="vg-item reveal">
-        <video src="d76caf6f-1cdc-459a-87f9-e502f977bfe4.mp4" autoplay muted loop playsinline></video>
-        <button class="vg-mute-btn" title="Toggle sound">🔇</button>
-      </div>
-      <div class="vg-item reveal reveal-delay-1">
-        <video src="577e169f-5b7b-4db7-a3a1-0b5f742fe142.mp4" autoplay muted loop playsinline></video>
-        <button class="vg-mute-btn" title="Toggle sound">🔇</button>
-      </div>
+    <div class="vc-wrapper" id="vcWrapper">
+      <div class="vc-slide"><video src="880c69f2-b02b-4dd1-aab4-69e34983cc6a.mp4" autoplay muted loop playsinline></video></div>
+      <div class="vc-slide"><video src="18b1ad3f-1231-42d2-af8a-30918c988c25.mp4" autoplay muted loop playsinline></video></div>
+      <div class="vc-slide"><video src="87a72384-f319-4791-b6f8-e7ba1c7ac018.mp4" autoplay muted loop playsinline></video></div>
+      <div class="vc-slide"><video src="d76caf6f-1cdc-459a-87f9-e502f977bfe4.mp4" autoplay muted loop playsinline></video></div>
+      <div class="vc-slide"><video src="577e169f-5b7b-4db7-a3a1-0b5f742fe142.mp4" autoplay muted loop playsinline></video></div>
     </div>
+    <div class="vc-dots" id="vcDots"></div>
   </div>
 </section>
 
@@ -2417,24 +2454,78 @@ function handleSubmit() {
 <!-- Google Translate (hidden — language picker uses this) -->
 <!-- Calendly widget script -->
 <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+<!-- ─── SPOTIFY FLOATING PLAYER ─── -->
+<div class="sp-player" id="spPlayer">
+  <button class="sp-toggle" id="spToggle" onclick="toggleSpotify()">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+    🎵 The Vibe
+  </button>
+  <div class="sp-embed hidden" id="spEmbed">
+    <iframe style="border-radius:12px"
+      src="https://open.spotify.com/embed/track/7GxOOU4kGlGiX6BVXQJ9Wz?utm_source=generator&theme=0"
+      width="300" height="80"
+      frameBorder="0"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy">
+    </iframe>
+  </div>
+</div>
+
 <script>
-// Video mute toggle
-document.querySelectorAll('.vg-mute-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const video = btn.previousElementSibling;
-    if (video.muted) {
-      // Mute all others first
-      document.querySelectorAll('.vg-item video').forEach(v => { v.muted = true; });
-      document.querySelectorAll('.vg-mute-btn').forEach(b => { b.textContent = '🔇'; });
-      // Unmute this one
-      video.muted = false;
-      btn.textContent = '🔊';
-    } else {
-      video.muted = true;
-      btn.textContent = '🔇';
-    }
+// ─── VIDEO CAROUSEL ───
+(function() {
+  const slides = Array.from(document.querySelectorAll('.vc-slide'));
+  const dotsEl = document.getElementById('vcDots');
+  const n = slides.length;
+  let cur = 0;
+  let timer;
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'vc-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(d);
   });
-});
+
+  function getClass(i) {
+    const pos = ((i - cur + n) % n);
+    if (pos === 0)     return 'vc-active';
+    if (pos === 1)     return 'vc-next';
+    if (pos === n - 1) return 'vc-prev';
+    if (pos === 2)     return 'vc-far-r';
+    return 'vc-far-l';
+  }
+
+  function update() {
+    slides.forEach((s, i) => {
+      s.className = 'vc-slide ' + getClass(i);
+    });
+    document.querySelectorAll('.vc-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === cur);
+    });
+  }
+
+  function goTo(idx) {
+    cur = ((idx % n) + n) % n;
+    update();
+    resetTimer();
+  }
+
+  function resetTimer() {
+    clearInterval(timer);
+    timer = setInterval(() => goTo(cur + 1), 4500);
+  }
+
+  update();
+  resetTimer();
+})();
+
+// ─── SPOTIFY TOGGLE ───
+function toggleSpotify() {
+  document.getElementById('spEmbed').classList.toggle('hidden');
+}
 </script>
 
 <div id="google_translate_element" style="display:none;visibility:hidden;"></div>
